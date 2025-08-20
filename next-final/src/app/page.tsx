@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="flex justify-evenly items-center flex-1 my-30 font-sans animate-fadeIn">
+      <div className="flex justify-evenly items-center flex-1 my-30 font-sans fade-in">
         <div className="flex">
           <main className="flex flex-col">
             <h1 className="melting-text"
