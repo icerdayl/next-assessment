@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../../.flowbite-react/class-list.json";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+};
+
+.btn-style507 {
+  --btn-color: #716eef;
+  position: relative;
+  border-color: var(--btn-color);
+  color: var(--btn-color);
+  overflow: hidden;
+}
+.btn-style507::before {
+  width: 15%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--btn-color);
+  transform: rotateZ(-45deg) translate(-50%, -50%);
+  transition: all 0.3s;
+  content: "";
+  z-index: -1;
+}
+.btn-style507:hover {
+  color: #fff;
+  transition-delay: 0.35s;
+}
+.btn-style507:hover::before {
+  animation: ani507 0.6s forwards;
+}
+
+@keyframes ani507 {
+  10% {
+    width: 0;
+    transform: rotateZ(-45deg) translate(-100%, -50%);
+  }
+  20% {
+    width: 0;
+    transform: rotateZ(0) translate(-100%, 85%);
+  }
+  60% {
+    width: 100%;
+    transform: rotateZ(0) translate(0, 85%);
+  }
+  100% {
+    width: 100%;
+    transform: rotateZ(0) translate(0, 0);
+  }
+}
+
+.btn-style3 {
+  --btn-color: #000000;
+  --btn-hover-color: #270036;
+  border-color: var(--btn-color);
+  color: var(--btn-color);
+}
+.btn-style3:hover {
+    transform: translateY(-0.25em);
+    box-shadow: 0 0 1em 0em #cf62fa;
+    border-color: var(--btn-hover-color);
+    color:#ffff;
+    background-color: #1e002c;
+}
+
+
+.melting-text-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.melting-text {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+    animation: melt 5s infinite ease-in-out;
+    background: linear-gradient(90deg, #716eef, #5d5bd1, #716eef  );
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 13px;
+}
+
+.melting-text::before,
+.melting-text::after {
+    content: 'NEXT JS PROJECT';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #716eef, #5d5bd1, #716eef);
+    background-clip: text;
+    color: transparent;
+    z-index: 0;
+    transform: scaleY(0.5);
+    opacity: 0.5;
+    animation: drip 5s infinite ease-in-out;
+}
+
+.melting-text::after {
+    filter: blur(10px);
+    opacity: 0.3;
+}
+
+/* Keyframes for melting effect */
+@keyframes melt {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+@keyframes drip {
+    0%, 100% {
+        transform: scaleY(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scaleY(1.1);
+        opacity: 0.7;
+    }
+}
+
+.neon-text {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 5px #dcb1ff, 0 0 10px #dcb1ff, 0 0 20px #dcb1ff, 0 0 40px #dcb1ff, 0 0 80px #dcb1ff;
+    animation: glow 3s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #dcb1ff, 0 0 10px #dcb1ff, 0 0 20px #dcb1ff, 0 0 40px #dcb1ff, 0 0 80px #dcb1ff;
+    }
+    100% {
+        text-shadow: 0 0 10px #4543d6, 0 0 20px #4543d6, 0 0 40px #4543d6, 0 0 80px #4543d6, 0 0 160px #4543d6;
+    }
+}
+
+
