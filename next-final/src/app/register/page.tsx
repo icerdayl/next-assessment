@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useRegisterInfo } from "@/hooks/useRegisterInfo"
+import { toast } from "react-toastify";
 
 
 const registerPage = () => {
@@ -14,6 +15,12 @@ const registerPage = () => {
             password: String(formData.get("password")),
             passwordConfirm: String(formData.get("passwordConfirm"))
         })
+        if (!String(formData.get("email")).includes("@")){
+                    toast.error("Please enter a valid email :(")
+                } else {
+                    window.location.replace("/login")
+                }
+
 
     }
     return(
@@ -32,25 +39,32 @@ const registerPage = () => {
                     </div>
                 </nav>
             </header>
-            <form className="flex flex-col justify-center mt-20 mb-30 flex-wrap" action={registerInfo}>
-                <h1 className="text-center font-extrabold text-lg neon-text">REGISTER</h1>
-                <div className="mt-4 items-center flex flex-col bg-purple-500 text-black w-100 h-115 rounded-3xl text-left justify-center mx-118">
-                    <div className=" flex-col mt-5 justify-center">
-                        <h3 className="font-bold mb-3">Name</h3>
-                        <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="text" id="name" name="name" required placeholder="Enter your name..."/>
-                        <h3 className="font-bold my-3">Email</h3>
-                        <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="text" id="email" name="email" required placeholder="Enter your email..."/>
-                        <h3 className="font-bold my-3">Password</h3>
-                        <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="password" id="password" name="password" required placeholder="Enter your password..."/>
-                        <h3 className="font-bold my-3">Confirm Password</h3>
-                        <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="password" id="passwordConfirm" name="passwordConfirm" required placeholder="Confirm your password..."/>
-                    </div>
-                    <Link href="/login">
-                    <button type="submit" className="mt-3 bg-black text-white font-bold cursor-pointer px-4 rounded-2xl hover:black hover:overflow-auto hover:border-2 hover:bg-purple-500 hover:text-black transition ease-in duration-500">Enter</button></Link>
-                    <p>Already have an account?<a href="/login"><b> Log in</b></a></p>
+            <div className="flex">
+                 <div className="flex">
+                    <img src="dashboard.png" alt="" className="fixed w-110 mt-35 rotate-20"/>
                 </div>
-                    
-            </form>
+                <form className="flex flex-col justify-center mt-20  flex-wrap" action={registerInfo}>
+                    <h1 className="text-center font-extrabold text-lg neon-text">REGISTER</h1>
+                    <div className="mt-4 items-center flex flex-col bg-purple-500 text-black w-100 h-115 rounded-3xl text-left justify-center mx-118">
+                        <div className=" flex-col mt-5 justify-center">
+                            <h3 className="font-bold mb-3">Name</h3>
+                            <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="text" id="name" name="name" required placeholder="Enter your name..."/>
+                            <h3 className="font-bold my-3">Email</h3>
+                            <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="text" id="email" name="email" required placeholder="Enter your email..."/>
+                            <h3 className="font-bold my-3">Password</h3>
+                            <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="password" id="password" name="password" required placeholder="Enter your password..."/>
+                            <h3 className="font-bold my-3">Confirm Password</h3>
+                            <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="password" id="passwordConfirm" name="passwordConfirm" required placeholder="Confirm your password..."/>
+                        </div>
+                        <button type="submit" className="mt-3 bg-black border-2 border-black text-white font-bold cursor-pointer px-4 rounded-2xl hover:black hover:overflow-auto hover:border-2 hover:bg-purple-500 hover:text-black transition ease-in duration-500 ove">Enter</button>
+                        <p>Already have an account?<a href="/login"><b> Log in</b></a></p>
+                    </div>
+                        
+                </form>
+               <div className="flex">
+                    <img src="person.png" alt="" className="fixed w-80 mt-45 ml-[-390px] rotate-30"/>
+                </div>
+            </div>
          </>
     )
 }

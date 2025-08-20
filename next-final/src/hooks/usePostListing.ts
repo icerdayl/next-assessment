@@ -10,8 +10,11 @@ export const usePostListing = () => {
         return response
     },
     onSuccess: () => {
-        toast.success("Added Succesfuly");
+        toast.success("Added Succesfuly! 😁");
         return queryClient.invalidateQueries({queryKey: ["listings"]});
+    },
+    onError: () => {
+        toast.error("An error occured. Posting failed 😭")
     }
     })}
 

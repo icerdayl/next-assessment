@@ -9,6 +9,10 @@ export const useUpdateListing = () => {
         return response
     },
     onSuccess: () => {
-        toast.success("Updated Succesfully!");
-        return  queryClient.invalidateQueries({queryKey: ["listings"]})}
+        toast.success("Updated Succesfully! 😁");
+        return  queryClient.invalidateQueries({queryKey: ["listings"]})
+    },
+    onError: () => {
+        toast.error("An error occured. Updating failed 😭")
+    }
     })}

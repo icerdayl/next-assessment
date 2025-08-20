@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-
 import { useGetListing } from "@/hooks/useGetListing";
 import { usePostListing} from "@/hooks/usePostListing";
 import { useDeleteListing } from "@/hooks/useDeleteListing";
@@ -26,9 +24,11 @@ export const LandingPage = () => {
     const {mutate: deleteList} = useDeleteListing()
     const {mutate: updateList} = useUpdateListing()
     const [editList, seteditList] = useState<Listing | null>(null)
+    const [detailList, setdetailList] = useState<Listing | null>(null)
 
     const editClick = (listing: Listing) => {
         seteditList(listing)
+        setdetailList(null)
     }
 
     const handleUpdate = (formValue: FormData) => {
@@ -50,26 +50,26 @@ export const LandingPage = () => {
         return(
             <div className="fixed flex inset-0 z-50 items-center justify-center backdrop-blur-xl bg-[rgb(0,0,0,0.7)]">
                 <div className="w-150">
-                    <div className=" bg-white text-black rounded-3xl flex flex-col">
+                    <div className=" bg-purple-400 text-black rounded-3xl flex flex-col">
                         <h1 className=" font-bold text-center font-sans text-xl ">Edit List</h1>
                         <form action={handleUpdate} className=" flex flex-col gap-1 ml-4">
                             <h3 className="font-bold">Title</h3>                             
-                            <input type="text" defaultValue={listing.title} name="titleUp" className="bg-gray-300 py-2 w-140 rounded-2xl pl-2  focus:bg-amber-200"/>
+                            <input type="text" defaultValue={listing.title} name="titleUp" className="bg-gray-300 py-1 w-140 rounded-2xl pl-2 border-2 border-purple-900  focus:bg-amber-200 focus:outline-purple-950"/>
                             <h3 className="font-bold">Tags</h3>
-                            <input type="text" defaultValue={listing.tags} name="tagsUp" className="bg-gray-300 py-2 w-140 rounded-2xl pl-2  focus:bg-amber-200"/>
+                            <input type="text" defaultValue={listing.tags} name="tagsUp" className="bg-gray-300 py-1 w-140 rounded-2xl pl-2 border-2 border-purple-900  focus:bg-amber-200 focus:outline-purple-950"/>
                             <h3 className="font-bold">Company</h3>
-                            <input type="text" defaultValue={listing.company} name="companyUp" className="bg-gray-300 py-2 w-140 rounded-2xl pl-2  focus:bg-amber-200"/>
+                            <input type="text" defaultValue={listing.company} name="companyUp" className="bg-gray-300 py-1 w-140 rounded-2xl pl-2 border-2 border-purple-900  focus:bg-amber-200 focus:outline-purple-950"/>
                             <h3 className="font-bold">Email</h3>
-                            <input type="text" defaultValue={listing.email} name="emailUp" className="bg-gray-300 py-2 w-140 rounded-2xl pl-2  focus:bg-amber-200"/>
+                            <input type="text" defaultValue={listing.email} name="emailUp" className="bg-gray-300 py-1 w-140 rounded-2xl pl-2 border-2 border-purple-900  focus:bg-amber-200 focus:outline-purple-950"/>
                             <h3 className="font-bold">Website</h3>
-                            <input type="text" defaultValue={listing.website} name="websiteUp" className="bg-gray-300 py-2 w-140 rounded-2xl pl-2  focus:bg-amber-200"/>
+                            <input type="text" defaultValue={listing.website} name="websiteUp" className="bg-gray-300 py-1 w-140 rounded-2xl pl-2 border-2 border-purple-900  focus:bg-amber-200 focus:outline-purple-950"/>
                             <h3 className="font-bold">Location</h3>
-                            <input type="text" defaultValue={listing.location} name="locationUp" className="bg-gray-300 py-2 w-140 rounded-2xl pl-2  focus:bg-amber-200"/>
+                            <input type="text" defaultValue={listing.location} name="locationUp" className="bg-gray-300 py-1 w-140 rounded-2xl pl-2 border-2 border-purple-900  focus:bg-amber-200 focus:outline-purple-950"/>
                             <h3 className="font-bold">Description</h3>                                             
-                            <input type="text" defaultValue={listing.description} name="descriptionUp" className="bg-gray-300 py-2 w-140 rounded-2xl pl-2  focus:bg-amber-200"/>
+                            <input type="text" defaultValue={listing.description} name="descriptionUp" className="bg-gray-300 py-1 w-140 rounded-2xl pl-2 border-2 border-purple-900  focus:bg-amber-200 focus:outline-purple-950"/>
                             <div className="flex gap-4 my-3">
-                                <button type="submit" className="bg-gray-300 py-2 px-4 rounded-xl hover:bg-amber-600 hover:text-black transition duration-500 ease-in font-bold cursor-pointer">SUMBIT</button>
-                                <button type="button" onClick={() => seteditList(null)} className="bg-gray-300 py-2 px-4 rounded-xl hover:bg-red-400 hover:text-black transition duration-500 ease-in font-bold cursor-pointer"> CANCEL</button>
+                                <button type="submit" className="bg-purple-400 text-purple-950 border-2 border-purple-950 py-2 px-4 rounded-xl hover:bg-purple-950 hover:text-white transition duration-500 ease-in font-bold cursor-pointer">SUMBIT</button>
+                                <button type="button" onClick={() => seteditList(null)} className=" py-2 px-4 rounded-xl border-2 border-red-600 bg-red-400 hover:bg-red-600 hover:text-black transition duration-500 ease-in font-bold cursor-pointer"> CANCEL</button>
                             </div>
                         </form>
                     </div>
@@ -80,6 +80,7 @@ export const LandingPage = () => {
 
     const deletePost = (id: string) => {
         deleteList(id)
+        setdetailList(null)
     }
 
     const addPost = (formData: FormData) => {
@@ -100,9 +101,10 @@ export const LandingPage = () => {
 
 
     if (isLoading){
-        return (
+        return(
             <div className="flex items-center justify-center h-screen">
-                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+                <div
+                    className="animate-spin rounded-full h-32 w-32 border-t-6 border-b-6 border-purple-500"></div>
             </div>
         )
     }
@@ -115,9 +117,52 @@ export const LandingPage = () => {
         )
     }   
     
+    const confirmLogout = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        if (!window.confirm("Are you sure you want to log out?")) {
+            e.preventDefault();
+        }
+    }
+
+    const handleDetails = (listing: Listing) => {
+        setdetailList(listing);
+    }
+
+
+    const details = (listing:Listing) => {
+        return(
+            <div className="fixed flex inset-0 z-50 items-center justify-center backdrop-blur-xl bg-[rgb(0,0,0,0.7)]">
+                <div className="w-150">
+                    <div className=" bg-purple-400 text-black rounded-3xl flex flex-col">
+                        <h1 className=" font-bold text-center font-sans text-xl ">Edit List</h1>
+                        <form action={handleUpdate} className=" flex flex-col gap-1 ml-4">
+                            <h3 className="font-bold">Title</h3>
+                            <p className="bg-amber-100 mr-4 rounded-lg pl-3">{listing.title}</p>                           
+                            <h3 className="font-bold">Tags</h3>
+                            <p className="bg-amber-100 mr-4 rounded-lg pl-3">{listing.tags}</p>
+                            <h3 className="font-bold">Company</h3>
+                            <p className="bg-amber-100 mr-4 rounded-lg pl-3">{listing.company}</p>
+                            <h3 className="font-bold">Email</h3>
+                            <p className="bg-amber-100 mr-4 rounded-lg pl-3">{listing.email}</p>
+                            <h3 className="font-bold">Website</h3>
+                            <p className="bg-amber-100 mr-4 rounded-lg pl-3">{listing.website}</p>
+                            <h3 className="font-bold">Location</h3>
+                            <p className="bg-amber-100 mr-4 rounded-lg pl-3">{listing.location}</p>
+                            <h3 className="font-bold">Description</h3>      
+                            <p className="bg-amber-100 mr-4 rounded-lg pl-3">{listing.description}</p>                                       
+                            <div className="flex gap-4 my-3">
+                                <button type="button" className="bg-purple-400 text-purple-950 border-2 border-purple-950 py-2 px-4 rounded-xl hover:bg-purple-950 hover:text-white transition duration-500 ease-in font-bold cursor-pointer" onClick={() => editClick(listing)} >EDIT</button>
+                                <button type="button" onClick={() => deletePost(listing.id.toString())} className=" py-2 px-4 rounded-xl border-2 border-red-600 bg-red-400 hover:bg-red-600 hover:text-black transition duration-500 ease-in font-bold cursor-pointer">DELETE</button>
+                                <button type="button" onClick={() => setdetailList(null)} className=" py-2 px-4 rounded-xl border-2 border-amber-400 bg-amber-200 hover:bg-amber-400 hover:text-black transition duration-500 ease-in font-bold cursor-pointer">CLOSE</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return(
-         <>
+         <div className="animate-fadeIn">
             <header>
                 <nav className="bg-white dark:bg-purple-500 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
                     <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -128,21 +173,22 @@ export const LandingPage = () => {
                         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                             <button type="button" className="font-extrabold mx-3 text-xl hover:text-purple-950 cursor-pointer ease-in transition duration-500"><a href="/">Home</a></button>
                             <button type="button" className="font-extrabold mx-3 text-xl hover:text-purple-950 cursor-pointer ease-in transition duration-500"><a href="/login">Get started</a></button>
+                            <button type="button" className="font-extrabold mx-3 text-xl hover:text-red-600 cursor-pointer ease-in transition duration-500"><a href="/login" onClick={confirmLogout}>Logout</a></button>
                         </div>
                     </div>
                 </nav>
             </header>
             <form action={addPost}className="flex-col justify-between text-center mt-20 flex-1">
                 <div className="">
-                <input className="mr-2 bg-purple-400 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="title" name="title" required placeholder="Enter the title..."/>
-                <input className="mr-2 bg-purple-400 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="tags" name="tags" required  placeholder="Enter the tags..."/>
-                <input className="mr-2 bg-purple-400 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="company" name="company" required placeholder="Enter the company..."/>
-                <input className="mr-2 bg-purple-400 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="email" name="email" required placeholder="Enter the email..."/>
+                <input className="mr-2 bg-amber-100 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="title" name="title" required placeholder="Enter the title..."/>
+                <input className="mr-2 bg-amber-100 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="tags" name="tags" required  placeholder="Enter the tags..."/>
+                <input className="mr-2 bg-amber-100 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="company" name="company" required placeholder="Enter the company..."/>
+                <input className="mr-2 bg-amber-100 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="email" name="email" required placeholder="Enter the email..."/>
                 </div>
                 <div className="mt-4">
-                <input className="mr-2 bg-purple-400 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="website" name="website" required placeholder="Enter the website..."/>
-                <input className="mr-2 bg-purple-400 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="location" name="location" required placeholder="Enter the location..."/>
-                <input className="mr-2 bg-purple-400 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="description" name="description" required  placeholder="Enter the description..."/>
+                <input className="mr-2 bg-amber-100 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="website" name="website" required placeholder="Enter the website..."/>
+                <input className="mr-2 bg-amber-100 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="location" name="location" required placeholder="Enter the location..."/>
+                <input className="mr-2 bg-amber-100 placeholder:text-purple-800 pr-5 pl-2 py-1.5 rounded-3xl text-black outline-amber-300 outline- border-2 border-amber-300"type="text" id="description" name="description" required  placeholder="Enter the description..."/>
                 <button type="submit" className="mr-41 border-2 border-purple-400 font-bold px-3 py-1.5 rounded-lg btn-style507 transition duration-300 ease-in cursor-pointer">Enter</button>
                 </div>
             </form>
@@ -151,7 +197,8 @@ export const LandingPage = () => {
                 {(listings ?? []).map((listing: Listing) => (  
                     <li
                         key={listing.id}
-                        className="flex-col flex p-4 mt-5 bg-purple-400 rounded-lg transition-all ease-in  btn-style3"
+                        className="flex-col flex p-4 mt-5 bg-purple-400 rounded-lg transition-all ease-in  btn-style3 cursor-pointer"
+                        
                     >
                         <div className="font-bold flex justify-between">{listing.title} 
                         <div className="flex gap-5">
@@ -159,20 +206,23 @@ export const LandingPage = () => {
                             <button className="hover:text-red-400 cursor-pointer" onClick={() => deletePost(listing.id.toString())}>Delete</button>
                         </div>
                         </div>
-                        <div className="text-sm">
-                        <div>{listing.tags}</div>
-                        <div>{listing.email}</div>
-                        <div>{listing.company}</div>
-                        <div>Email: {listing.website}</div>
-                        <div>Location: {listing.location}</div>
-                        <div>Job Description: {listing.description}</div>
+                        <div onClick={() => handleDetails(listing)}>
+                            <div className="text-sm">
+                                <div>{listing.tags}</div>
+                                <div>{listing.email}</div>
+                                <div>{listing.company}</div>
+                                <div>Email: {listing.website}</div>
+                                <div>Location: {listing.location}</div>
+                                <div>Job Description: {listing.description}</div>
+                            </div>
                         </div>
                     </li>
                 
                 ))}
             </ul>
             {editList && updatePost(editList)}
-         </>
+            {detailList && details(detailList)}
+         </div>
     )
 }
 

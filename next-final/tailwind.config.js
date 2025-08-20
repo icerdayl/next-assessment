@@ -1,18 +1,21 @@
-// tailwind.config.js
 module.exports = {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       keyframes: {
-        slideInFromLeft: {
-          '0%': { transform: 'translateX(-100%)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
-
       },
       animation: {
-        'slide-in-left': 'slideInFromLeft 1s ease-out forwards', // 
+        fadeIn: 'fadeIn 3s ease-in-out',
       },
     },
   },
   plugins: [],
-};
+}

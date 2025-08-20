@@ -2,6 +2,7 @@
 @plugin "flowbite-react/plugin/tailwindcss";
 @source "../../.flowbite-react/class-list.json";
 
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -22,7 +23,7 @@ body {
 };
 
 .btn-style507 {
-  --btn-color: #716eef;
+  --btn-color: #C084FC;
   position: relative;
   border-color: var(--btn-color);
   color: var(--btn-color);
@@ -94,7 +95,7 @@ body {
     color: #fff;
     position: relative;
     animation: melt 5s infinite ease-in-out;
-    background: linear-gradient(90deg, #716eef, #5d5bd1, #716eef  );
+    background: linear-gradient(90deg, #C084FC, #C084FC, #C084FC  );
     background-clip: text;
     color: transparent;
     margin-bottom: 13px;
@@ -102,13 +103,13 @@ body {
 
 .melting-text::before,
 .melting-text::after {
-    content: 'NEXT JS PROJECT';
+    content: 'API COLLECTOR';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #716eef, #5d5bd1, #716eef);
+    background: linear-gradient(90deg, #C084FC, #C084FC, #C084FC);
     background-clip: text;
     color: transparent;
     z-index: 0;
@@ -158,5 +159,6 @@ body {
         text-shadow: 0 0 10px #4543d6, 0 0 20px #4543d6, 0 0 40px #4543d6, 0 0 80px #4543d6, 0 0 160px #4543d6;
     }
 }
+
 
 

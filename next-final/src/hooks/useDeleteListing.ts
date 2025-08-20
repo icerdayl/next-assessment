@@ -13,7 +13,10 @@ export const useDeleteListing = () => {
         return response
     },
     onSuccess: () => {
-        toast.success("Deleted Succesfully!");
+        toast.success("Deleted Succesfully 😁");
         return queryClient.invalidateQueries({queryKey: ["listings"]});
+    },
+    onError: () => {
+        toast.error("An error occured. Deleting failed 😭")
     }
     })}

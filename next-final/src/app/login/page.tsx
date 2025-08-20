@@ -1,10 +1,13 @@
 "use client";
 
-import Link from "next/link"
 import { useLoginInfo } from "@/hooks/useLoginInfo";
+import { toast } from "react-toastify";
+
+
 
 const loginPage = () => {
     const{mutate: loginList} = useLoginInfo()
+ 
 
     const loginInfo = (formData: FormData) => {
         loginList({
@@ -12,9 +15,14 @@ const loginPage = () => {
             password: String(formData.get("password")),
 
         })
-        console.log(loginInfo)
-
+        if (!String(formData.get("email")).includes("@")){
+            toast.error("Please enter a valid email :(")
+        } else {
+            window.location.replace("/main")
+        }
     }
+    
+
     return(
         <>
             <header>
@@ -31,21 +39,28 @@ const loginPage = () => {
                     </div>
                 </nav>
             </header>
-            <form className="flex flex-col justify-center mt-20 mb-30 flex-wrap" action={loginInfo}>
-                <h1 className="text-center font-extrabold text-lg neon-text">LOGIN</h1>
-                <div className="mt-5 items-center flex flex-col bg-purple-500 text-black w-100 h-75 rounded-3xl text-left justify-center mx-120">
-                    <div className=" flex-col mt-5 justify-center">
-                        <h3 className="font-bold mb-3">Email</h3>
-                        <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="text" id="email" name="email" required placeholder="Enter your email..."/>
-                        <h3 className="font-bold my-3">Password</h3>
-                        <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="password" id="password" name="password" required placeholder="Enter your password..."/>
-                    </div>
-                    <Link href="/main">
-                    <button type="submit" className="mt-3 bg-black text-white font-bold cursor-pointer px-4 rounded-2xl hover:black hover:overflow-auto hover:border-2 hover:bg-purple-500 hover:text-black transition ease-in duration-500">Enter</button></Link>
-                    <p>Don't have an account?<a href="/register"><b> Register</b></a></p>
+            <div className="flex">
+                <div className="flex">
+                    <img src="dashboard.png" alt="" className="fixed w-110 mt-35 rotate-20"/>
                 </div>
-                    
-            </form>
+                <form className="flex flex-col justify-center mt-20 mb-30 flex-wrap" action={loginInfo}>
+                    <h1 className="text-center font-extrabold text-lg neon-text">LOGIN</h1>
+                    <div className="mt-5 items-center flex flex-col bg-purple-500 text-black w-100 h-75 rounded-3xl text-left justify-center mx-120">
+                        <div className=" flex-col mt-5 justify-center">
+                            <h3 className="font-bold mb-3">Email</h3>
+                            <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="text" id="email" name="email" required placeholder="Enter your email..."/>
+                            <h3 className="font-bold my-3">Password</h3>
+                            <input className="bg-purple-300 py-3 px-6 rounded-2xl outline-0 w-90"type="password" id="password" name="password" required placeholder="Enter your password..."/>
+                        </div>
+                        <button type="submit" className="mt-3 bg-black border-2 border-black text-white font-bold cursor-pointer px-4 rounded-2xl hover:black hover:overflow-auto hover:border-2 hover:bg-purple-500 hover:text-black transition ease-in duration-500">Enter</button>
+                        <p>Don't have an account?<a href="/register"><b> Register</b></a></p>
+                    </div>
+                        
+                </form>
+                <div className="flex">
+                    <img src="person.png" alt="" className="fixed w-80 mt-45 ml-[-400px] rotate-30"/>
+                </div>
+            </div>
          </>
     )
 }

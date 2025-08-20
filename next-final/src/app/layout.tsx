@@ -24,8 +24,6 @@ export default function RootLayout({
       <body
         className={`${roboto.variable} antialiased`}
       > 
-#270036
-#cf62fa
         <TanstackProvider>
           {children}
           <ToastContainer />
